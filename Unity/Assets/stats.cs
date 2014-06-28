@@ -43,10 +43,10 @@ public class stats : MonoBehaviour {
 		textStyle.alignment = TextAnchor.MiddleCenter;
 
 		if(statName.Equals("tapsSec")){
-			text = ((float)PlayerPrefs.GetInt("totalTimePlayed") / PlayerPrefs.GetInt("totalTaps")).ToString();
-			score = (int)((float)PlayerPrefs.GetInt("totalTimePlayed") / PlayerPrefs.GetInt("totalTaps"));
+			text = ((int)(((float)PlayerPrefs.GetInt("totalTimePlayed") / PlayerPrefs.GetInt("totalTaps")) * 1000)).ToString();
+			score = (int)(((float)PlayerPrefs.GetInt("totalTimePlayed") / PlayerPrefs.GetInt("totalTaps")) * 1000);
 		}else if(statName.Equals("reactionTimeBest")){
-			text = PlayerPrefs.GetFloat(statName).ToString();
+			text = ((int)(PlayerPrefs.GetFloat(statName) * 1000)).ToString();
 			score = (int)PlayerPrefs.GetFloat(statName);
 		}else{
 			text = PlayerPrefs.GetInt(statName).ToString();
