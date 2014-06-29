@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class stats : MonoBehaviour {
 
@@ -52,6 +53,18 @@ public class stats : MonoBehaviour {
 			text = PlayerPrefs.GetInt(statName).ToString();
 			score = PlayerPrefs.GetInt(statName);
 		}
+		if (score < 0) {
+			text = "0";		
+		}
+
+		try{
+			// submit highscore
+			if(score != 0 && score != null){
+				GameCenterManager.reportScore(score, leaderBoardId);
+			}
+		}catch(Exception e){
+			Debug.Log("Cant submit score, ERROR: " +  e.Message);
+		}
 	}
 	
 	// Update is called once per frame
@@ -67,28 +80,21 @@ public class stats : MonoBehaviour {
 			div = (Screen.width / 4) * 3 - 100;
 		}
 
-		textStyle.fontSize = 20;
+		textStyle.fontSize = Screen.height / 40;
 		GUI.Label(new Rect(div, (Screen.height / 100) * yVal, 200, 20), statText, textStyle);
-		textStyle.fontSize = 40;
+		textStyle.fontSize = Screen.height / 20;
 		GUI.Label(new Rect(div, (Screen.height / 100) * yVal + ((Screen.height / 100) * 7), 200, 20), text, textStyle);
 	}
 
 	void OnMouseDown() {
-		// submit highscore
-		if(score != 0 && score != null){
-			GameCenterManager.reportScore(score, leaderBoardId);
-		}
-
-
 		this.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
 	}
 	
 	void OnMouseUp() {
 		this.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
 
-
 		// Load scoreboard for this stat
-		GameCenterManager.showLeaderBoard(leaderBoardId);
+		GameCenterManager.showLeaderBoard (leaderBoardId);
 	}
 
 	//--------------------------------------
@@ -104,7 +110,7 @@ public class stats : MonoBehaviour {
 	}
 	
 	private void OnAchievementsReset() {
-		Debug.Log ("All  Achievemnts was reseted");
+		IOSNativePopUpManager.showMessage("Game Center ", "All achievements has been reset.");
 	}
 	
 	private void OnAchievementProgress(CEvent e) {
@@ -121,14 +127,12 @@ public class stats : MonoBehaviour {
 	
 	
 	private void OnAuth() {
-		IOSNativePopUpManager.showMessage("Player Authed ", "ID: " + GameCenterManager.player.playerId + "\n" + "Alias: " + GameCenterManager.player.alias);
+		IOSNativePopUpManager.showMessage("Game Center ", "Welcome " + GameCenterManager.player.alias);
+		// ID: GameCenterManager.player.playerId
+		// Alias: GameCenterManager.player.alias
 	}
 	
 	private void OnAuthFailed() {
-		IOSNativePopUpManager.showMessage("Game Cneter ", "Player auntification failed");
-		
-		//if you got this event it means that player canseled auntification flow. With probably mean that playr do not whant to use gamcenter in your game
-		
-		
+		IOSNativePopUpManager.showMessage("Game Center ", "To view the leaderboards please enable GameCenter.");
 	}
 }

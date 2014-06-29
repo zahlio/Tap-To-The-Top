@@ -62,9 +62,10 @@ public class reaction : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		pointsStyle.fontSize = 20;
+		pointsStyle.fontSize = Screen.height / 30;
 		GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 3.25f, 200, 20), "Tap when the circle changes size", pointsStyle);
-		pointsStyle.fontSize = 45;
+
+		pointsStyle.fontSize = Screen.height / 20;
 		GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - Screen.height / 2.75f, 200, 20), circleString.ToString(), pointsStyle);
 	}
 }

@@ -77,17 +77,18 @@ public class clicker : MonoBehaviour {
 
 	void OnGUI() {
 		if(!isFinished){
-			pointsStyle.fontSize = 30;
+			pointsStyle.fontSize = Screen.height / 25;
 			GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 3.25f, 200, 20), points.ToString(), pointsStyle);
 
 			if(isTiming){
-				pointsStyle.fontSize = 45;
+				pointsStyle.fontSize = Screen.height / 10;
 			}
 			GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - Screen.height / 2.75f, 200, 20), circleString.ToString(), pointsStyle);
 		}else{
-			pointsStyle.fontSize = 30;
+			pointsStyle.fontSize = Screen.height / 15;
 			GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 3.25f, 200, 20), points.ToString(), pointsStyle);
-			pointsStyle.fontSize = 45;
+
+			pointsStyle.fontSize = Screen.height / 15;
 			GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - Screen.height / 2.75f, 200, 20), "Score: " + points.ToString(), pointsStyle);
 			GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - Screen.height / 4.5f, 200, 20), "Back", pointsStyle);
 		}

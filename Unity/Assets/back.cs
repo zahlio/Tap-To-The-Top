@@ -24,7 +24,7 @@ public class back : MonoBehaviour {
 
 	void OnGUI(){
 		
-		textStyle.fontSize = 45;
+		textStyle.fontSize = Screen.height / 20;
 		GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - Screen.height / 4.5f, 200, 20), "Back", textStyle);
 	}
 }

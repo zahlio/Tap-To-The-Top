@@ -5,7 +5,7 @@ public class menu : MonoBehaviour {
 
 	public string text = "NONE";
 	public string levelToLoad = "NONE";
-	public int xVal = 50;
+	public int number = 1;
 	public GUIStyle textStyle;
 
 	// Use this for initialization
@@ -20,9 +20,11 @@ public class menu : MonoBehaviour {
 
 	void OnGUI() {
 		Vector3 pos = new Vector3(this.transform.position.x, this.transform.position.y, 0);
-		
-		textStyle.fontSize = 40;
-		GUI.Label(new Rect((Screen.width / 2) - 100, (Screen.height / 100) * xVal + 10, 200, 20), text, textStyle);
+
+		// get font size
+		textStyle.fontSize = Screen.height / 20;
+		float top = (Screen.height / 100) * number;
+		GUI.Label(new Rect(Screen.width / 2 - 100, top, 200, 20), text, textStyle);
 	}
 
 	void OnMouseDown() {
